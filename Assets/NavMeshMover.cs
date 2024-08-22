@@ -14,7 +14,6 @@ public class NavMeshMover : MonoBehaviour
         _player = FindObjectOfType<MotionScript>().transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         _agent.SetDestination(_player.position);

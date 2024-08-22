@@ -13,7 +13,7 @@ public class PlayerDeath : MonoBehaviour
 
     void Update()
     {
-        var enemyCount = Physics.OverlapSphereNonAlloc(transform.position, 7, _enemies, _enemyMask);
+        var enemyCount = Physics.OverlapSphereNonAlloc(transform.position, 4, _enemies, _enemyMask);
         if (enemyCount >= 6) Destroy(gameObject);
     }
 }
