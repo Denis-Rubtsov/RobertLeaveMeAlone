@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class NavMeshMover : MonoBehaviour
 {
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField] Animator _animator;
     private Transform _player;
 
     void Start()
@@ -17,5 +18,6 @@ public class NavMeshMover : MonoBehaviour
     void Update()
     {
         _agent.SetDestination(_player.position);
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
 }
