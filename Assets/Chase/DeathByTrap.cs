@@ -14,6 +14,7 @@ public class DeathByTrap : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.TryGetComponent<EnemyDeath>(out var enemyDeath)) enemyDeath.Die();
+        if (other.TryGetComponent<PlayerChase>(out var playerChase)) playerChase.Die();
     }
 }

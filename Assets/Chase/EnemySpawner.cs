@@ -6,7 +6,6 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float _spawnDelay;
     [SerializeField] GameObject _prefab;
-    float _timer = 0;
     private Transform _player;
     Vector3 _enemySpawnPoint;
 
@@ -25,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(_spawnDelay);
             CreateEnemy();
         }
     }
