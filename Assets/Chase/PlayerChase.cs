@@ -29,8 +29,6 @@ public class PlayerChase : MonoBehaviour
         IsDead = true;
         _animator.SetTrigger("Died");
         StartCoroutine(Despawn());
-        var enemies = FindObjectsOfType<NavMeshMover>();
-        foreach (var enemy in enemies) Destroy(enemy);
     }
 
     IEnumerator Despawn()
