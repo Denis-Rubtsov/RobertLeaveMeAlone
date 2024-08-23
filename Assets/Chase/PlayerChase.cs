@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerChase : MonoBehaviour
 {
+    [SerializeField] MotionScript _mover;
     [SerializeField] Animator _animator;
     [SerializeField] LayerMask _enemyMask;
     [SerializeField] float _despawnTime;
@@ -14,11 +15,12 @@ public class PlayerChase : MonoBehaviour
     void Update()
     {
         EnemyCount = Physics.OverlapSphereNonAlloc(transform.position, 4, _enemies, _enemyMask);
-        if (EnemyCount >= 6)
+        if (EnemyCount >= 6) Die();
+        if (!IsDead)
         {
-            IsDead = true;
-            _animator.SetTrigger("Died");
-            StartCoroutine(Despawn());
+            var horizontal = Input.GetAxis("Horizontal");
+            var vertical = Input.GetAxis("Vertical");
+            _mover.Move(new Vector3(vertical, 0, -horizontal));
         }
     }
 
@@ -27,6 +29,8 @@ public class PlayerChase : MonoBehaviour
         IsDead = true;
         _animator.SetTrigger("Died");
         StartCoroutine(Despawn());
+        var enemies = FindObjectsOfType<NavMeshMover>();
+        foreach (var enemy in enemies) Destroy(enemy);
     }
 
     IEnumerator Despawn()

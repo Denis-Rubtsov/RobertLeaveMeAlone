@@ -633,7 +633,7 @@ MonoBehaviour:
   _enemyCount: {fileID: 1728090060}
   _timer: {fileID: 836413421}
   _gameOverTime: {fileID: 1144925705}
-  _player: {fileID: 9192884961714023841}
+  _player: {fileID: 0}
   _gameOverMenu: {fileID: 1924013501}
   _enemySpawner: {fileID: 339109592}
 --- !u!1 &523557136

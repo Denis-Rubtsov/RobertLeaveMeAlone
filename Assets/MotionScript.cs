@@ -10,19 +10,20 @@ public class MotionScript : MonoBehaviour
 
     private Vector3 _input;
 
-    void Update()
+    internal void Move(Vector3 motion)
     {
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
-        _input = new Vector3(vertical, 0, -horizontal);
-        if (_input.sqrMagnitude > 0.05f)
+        if (motion.sqrMagnitude > 0.05f)
         {
-            _input.y = 0;
-            _input.Normalize();
-            transform.forward = _input;
-            _controller.Move(_input * _speed * Time.deltaTime);
+            motion.y = 0;
+            motion.Normalize();
+            transform.forward = motion;
+            _controller.Move(motion * _speed * Time.deltaTime);
             _animator.SetFloat("Speed", _controller.velocity.magnitude);
         }
         else _animator.SetFloat("Speed", 0);
+    }
+
+    void Update()
+    {
     }
 }
