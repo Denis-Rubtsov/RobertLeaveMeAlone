@@ -16,12 +16,18 @@ public class Interface : MonoBehaviour
     [SerializeField] Button _mainMenuButton;
     [SerializeField] Button _restartButton;
     float _time = 0;
+    float _record;
     bool _gameEnded = false;
 
     private void OnEnable()
     {
         _mainMenuButton.onClick.AddListener(MainMenuClicked);
         _restartButton.onClick.AddListener(RestartClicked);
+    }
+
+    private void Start()
+    {
+        _record = Restore();
     }
 
     void RestartClicked()
@@ -39,21 +45,43 @@ public class Interface : MonoBehaviour
         if (!_player.IsDead && !Input.GetKeyDown(KeyCode.Escape) && !_gameEnded)
         {
             _time += Time.deltaTime;
-            _timer.text = $"{_time} сек";
-            _enemyCount.text = $"Врагов рядом: {_player.EnemyCount}";
+            _timer.text = $"{_time} seconds\nRecord: {_record}";
+            _enemyCount.text = $"Enemies nearby: {_player.EnemyCount}";
         }
-        else 
-        {
-            _gameOverMenu.active = true;
-            _enemySpawner.active = false;
-            _gameOverTime.text = $"{_time} секунд";
-            _gameEnded = true;
-        }
+        else if(!_gameEnded) EndGame();
     }
 
     private void OnDisable()
     {
         _mainMenuButton.onClick?.RemoveAllListeners();
         _restartButton.onClick?.RemoveAllListeners();
+    }
+
+    void EndGame()
+    {
+        _gameOverMenu.SetActive(true);
+        _enemySpawner.SetActive(false);
+        if (_time > _record)
+        {
+            _gameOverTime.text = $"New Record!\n{_time} seconds";
+            Save(_time);
+        }
+        else _gameOverTime.text = $"{_time} seconds\nRecord: {_record} seconds";
+        _gameEnded = true;
+        var enemies = FindObjectsOfType<NavMeshMover>();
+        foreach (var enemy in enemies) Destroy(enemy.gameObject);
+    }
+
+    void Save(float time) => PlayerPrefs.SetFloat("ChaseRecord", time);
+
+    float Restore()
+    {
+        float time;
+        if (PlayerPrefs.HasKey("ChaseRecord"))
+        {
+            time = PlayerPrefs.GetFloat("ChaseRecord");
+            return time;
+        }
+        else return 0;
     }
 }
