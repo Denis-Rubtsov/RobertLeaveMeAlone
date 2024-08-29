@@ -6,12 +6,11 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float _spawnDelay;
     [SerializeField] GameObject _prefab;
-    private Transform _player;
+    [SerializeField] GameObject _player;
     Vector3 _enemySpawnPoint;
 
     void Start()
     {
-        _player = FindObjectOfType<MotionScript>().transform;
         StartCoroutine(SpawnEnemies());
     }
 
@@ -36,9 +35,9 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 NewEnemySpawnPoint()
     {
-        Vector3 newEnemySpawnPoint = _player.position;
-        newEnemySpawnPoint.x += Random.RandomRange(-2, 2);
-        newEnemySpawnPoint.z += Random.RandomRange(-2, 2);
+        Vector3 newEnemySpawnPoint = _player.transform.position;
+        newEnemySpawnPoint.x += Random.Range(-2f, 2f);
+        newEnemySpawnPoint.z += Random.Range(-2f, 2f);
         return newEnemySpawnPoint;
     }
 }
