@@ -12,7 +12,7 @@ public class EnemyDeath : MonoBehaviour
 
     public void Die()
     {
-        _agent.Stop();
+        _agent.isStopped = true;
         _animator.SetTrigger("Died");
         StartCoroutine(Despawn());
     }

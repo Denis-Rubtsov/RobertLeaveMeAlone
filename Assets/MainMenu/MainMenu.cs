@@ -19,17 +19,19 @@ public class MainMenu : MonoBehaviour
 
     void ChaseClicked()
     {
+        if (_chaseButton.TryGetComponent<AudioSource>(out var source)) source.Play();
         SceneManager.LoadScene("ChaseScene");
     }
 
     void ExitClicked()
     {
+        if (_exitButton.TryGetComponent<AudioSource>(out var source)) source.Play();
         Application.Quit();
     }
 
     void BattleClicked()
     {
-
+        if (_battleButton.TryGetComponent<AudioSource>(out var source)) source.Play();
     }
 
     private void OnDisable()

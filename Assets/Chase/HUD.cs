@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class Interface : MonoBehaviour
+public class HUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _enemyCount;
     [SerializeField] TextMeshProUGUI _timer;
@@ -32,11 +32,13 @@ public class Interface : MonoBehaviour
 
     void RestartClicked()
     {
+        if(_restartButton.TryGetComponent<AudioSource>(out var source)) source.Play();
         SceneManager.LoadScene("ChaseScene");
     }
 
     void MainMenuClicked()
     {
+        if (_mainMenuButton.TryGetComponent<AudioSource>(out var source)) source.Play();
         SceneManager.LoadScene("MainMenu");
     }
 
