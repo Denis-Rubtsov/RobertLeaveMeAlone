@@ -6,6 +6,7 @@
 //// Contact: support@codewart.com
 //// Unity Asset Store: https://assetstore.unity.com/publishers/49258
 /////////////////////////////////////////////
+#if UNITY_EDITOR
 
 using UnityEngine;
 using System.Collections;
@@ -43,3 +44,4 @@ public class customButton : Editor
     }
 
 }
+#endif

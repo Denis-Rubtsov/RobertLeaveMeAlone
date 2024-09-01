@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class NavMeshMover : MonoBehaviour
 {
     [SerializeField] NavMeshAgent _agent;
+    [SerializeField] Animator _animator;
     private Transform _player;
 
     void Start()
@@ -13,9 +14,9 @@ public class NavMeshMover : MonoBehaviour
         _player = FindObjectOfType<MotionScript>().transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         _agent.SetDestination(_player.position);
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
 }

@@ -7,26 +7,23 @@ public class MotionScript : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private Animator _animator;
-    private Camera _camera;
 
     private Vector3 _input;
 
-    void Start()
+    internal void Move(Vector3 motion)
     {
-        _camera = Camera.main;
+        if (motion.sqrMagnitude > 0.05f)
+        {
+            motion.y = 0;
+            motion.Normalize();
+            transform.forward = motion;
+            _controller.Move(motion * _speed * Time.deltaTime);
+            _animator.SetFloat("Speed", _controller.velocity.magnitude);
+        }
+        else _animator.SetFloat("Speed", 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
-        _input = new Vector3(horizontal, 0, vertical);
-        Vector3 moveDirection = _camera.transform.TransformDirection(_input);
-        moveDirection.y = 0;
-        //moveDirection.Normalize();
-        transform.forward = moveDirection;
-        _controller.Move(_input * _speed * Time.deltaTime);
-        _animator.SetFloat("Speed", _controller.velocity.magnitude);
     }
 }
