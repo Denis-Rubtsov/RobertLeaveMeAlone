@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Chase/ChaseScene.unity
     guid: 623a1db569dcdbd409f326ac6ea299bd
+  - enabled: 1
+    path: Assets/Battle/BattleScene.unity
+    guid: d848704c732f64003a0856de1a1fd894
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e689a87ef975ffa4398c55fda387a4c5,
       type: 2}

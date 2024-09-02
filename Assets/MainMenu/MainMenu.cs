@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
     void BattleClicked()
     {
         if (_battleButton.TryGetComponent<AudioSource>(out var source)) source.Play();
+        SceneManager.LoadScene("BattleScene");
     }
 
     private void OnDisable()
